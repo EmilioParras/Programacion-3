@@ -1,4 +1,4 @@
-public class GrafoNoDirigido<T> extends GrafoDirigido<T> {
+public class GrafoNoDirigido<T> extends GrafoDirigidoSet<T> {
     
     @Override
 	public void agregarArco(int verticeId1, int verticeId2, T etiqueta) {

@@ -22,4 +22,16 @@ public class Arco<T> {
         return this.etiqueta;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        try {
+            Arco<T> temp = (Arco<T>) obj;
+            return this.getVerticeOrigen() == temp.getVerticeOrigen() 
+                && this.getVerticeDestino() == temp.getVerticeDestino();
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
 }
