@@ -1,3 +1,5 @@
+package practico4.ejercicio4;
+
 import java.util.Iterator;
 
 public interface Grafo<T> {

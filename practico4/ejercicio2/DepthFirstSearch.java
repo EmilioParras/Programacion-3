@@ -2,6 +2,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import practico4.ejercicio4.GrafoDirigido;
+
 public class DepthFirstSearch<T> {
     
     private Map<Integer, String> colores;

@@ -1,5 +1,6 @@
 package practico4.ejercicio4;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -8,44 +9,52 @@ public class MetodoEjercicio4<T> {
     
     private LinkedList<Integer> camino;
     private Map<Integer, String> colores;
+    private int tamMayor = -1;
 
-    public void MetodoE4(GrafoDirigido<T> grafo, Integer verticeI, Integer verticeJ) {
-
+    public LinkedList<Integer> MetodoE4(GrafoDirigido<T> grafo, Integer origen, Integer destino) {
         camino = new LinkedList<>();
-        int tam = 0;
-        int tamMayor = 0;
+        colores = new HashMap<>();
+        tamMayor = -1;
         
-        Iterator<Integer> vertices = grafo.obtenerVertices(); // Recorro todos los vertices y los pongo en blanco.
+        // Recorro todos los vertices y los pongo como NO VISITADOS.
+        Iterator<Integer> vertices = grafo.obtenerVertices(); 
         while (vertices.hasNext()) {
             Integer verticeAux = vertices.next();
             colores.put(verticeAux, "Blanco");
         }
 
-            if (colores.get(verticeI) == "Blanco") {
-                tam = MetodoE4_Visit(grafo, verticeI, verticeJ);
-            }
+        LinkedList<Integer> caminoActual = new LinkedList<>();
+        caminoActual.add(origen);
+        MetodoE4_Visit(grafo, origen, destino, caminoActual);
 
-        if (tam > tamMayor) {
-            tamMayor = tam;
-        }
-
-        System.out.println("El camino mas largo es de " + tamMayor);
+        return camino;
     }
 
+    public void MetodoE4_Visit(GrafoDirigido grafo, Integer actual, Integer destino, LinkedList<Integer> caminoActual) {
 
-    public int MetodoE4_Visit (GrafoDirigido grafo, Integer verticeI, Integer verticeJ) {
-        int tam = 0;
-        colores.put(verticeI, "Amarillo");
-        Iterator<Integer> adyacentes = grafo.obtenerAdyacentes(verticeI);
+        if (actual.equals(destino)) {
+            if (caminoActual.size() > tamMayor) {
+                tamMayor = caminoActual.size();
+                camino = new LinkedList<>(caminoActual);
+            }
+            return;
+        }
+
+        colores.put(actual, "Amarillo");
+
+        Iterator<Integer> adyacentes = grafo.obtenerAdyacentes(actual);
         while (adyacentes.hasNext()) {
-            Integer verticeAux = adyacentes.next();
-            tam++;
-            if () {
-                
+            Integer siguiente = adyacentes.next();
+            
+            if (colores.get(siguiente) == "Blanco") {
+                caminoActual.addLast(siguiente);
+                MetodoE4_Visit(grafo, siguiente, destino, caminoActual);
+                caminoActual.removeLast();
             }
         }
 
+        colores.put(actual, "Blanco");
 
-        return tam;
     }
+
 }

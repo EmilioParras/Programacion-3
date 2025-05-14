@@ -1,3 +1,5 @@
+package practico4.ejercicio4;
+
 public class Arco<T> {
     
     private int verticeOrigen;
